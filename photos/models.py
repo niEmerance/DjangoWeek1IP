@@ -17,9 +17,14 @@ class Image(models.Model):
     imgDesc=models.TextField()
     imgLoc=models.ForeignKey(ImageLocation)
     imgCtgry=models.ForeignKey(ImageCategory)
+    upload_image = models.ImageField(upload_to = 'pictures/')
 
     def __str__(self):
         return self.imgName
 
-    def save_editor(self):
-        self.save()
+    # def save_Image(self):
+    #     self.save()
+    @classmethod
+    def save_Image(cls):
+        photos = cls.objects.all()
+        return photos

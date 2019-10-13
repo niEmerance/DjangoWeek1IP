@@ -1,5 +1,25 @@
 {%extends 'all-picsPages/base.html'%}
+{% block content %} 
+{{ block.super}}
 
-{% block content %}
-{{block.super}}
+<div class="container">
+
+  <!-- Looping through news   -->
+{% for photo in photos %}
+
+<div class="col-md-4">
+  <!-- {{ photo.imgName }} -->
+  <img src="{{photo.upload_image.url}}" class="img-responsive" alt="Image" style="width:350px; height:250px" >
+  <!-- {{ photo.imgDesc }}
+  {{ photo.imgLoc }}
+  {{ photo.imgCtgry }} -->
+</div>
+  {% empty %}
+  <div class="row">
+    <h2 class="text-center">No posted Pictures Yet</h2>
+  </div>
+  {% endfor %}
+
+</div>
+
 {% endblock %}

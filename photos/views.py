@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
 import datetime as dt
+from .models import Image
 
 # Create your views here.
 def welcome(request):
@@ -8,4 +9,5 @@ def welcome(request):
 
 def gallery(request):
     date = dt.date.today()
-    return render(request, 'all-picsPages/gallery.html', {"date": date,})
+    photos = Image.save_Image()
+    return render(request, 'all-picsPages/gallery.html', {"date": date,"photos":photos})
