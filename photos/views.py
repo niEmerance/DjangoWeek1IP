@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.http  import HttpResponse
+from django.shortcuts import render,redirect
+from django.http  import HttpResponse,Http404
+from .models import Image,ImageLocation,ImageCategory
 import datetime as dt
-from .models import Image
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 def welcome(request):
@@ -22,3 +23,10 @@ def searchImage(request):
     else:
         message='no search yet'
         return render(request,'search.html',{'message':message})
+
+def imgDesc(request,imageId):
+    try:
+        imageIds=Image.objects.get(id=imageId)
+    except ObjectDoesNotExist:
+        raise Http404
+    return render (request,'imgDesc.html',{'imageIds':imageIds})
