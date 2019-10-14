@@ -14,7 +14,7 @@ def gallery(request):
     return render(request, 'all-picsPages/gallery.html', {"date": date,"photos":photos})
 
 def searchImage(request):
-    if 'image' in request.GET and request.GET['photo']:
+    if 'imgName' in request.GET and request.GET['photo']:
         search_term=request.GET.get('photo')
         photos=Image.searchImage(search_term)
         message = f"{search_term}"
