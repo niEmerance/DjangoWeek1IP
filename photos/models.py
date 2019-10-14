@@ -7,11 +7,18 @@ class ImageLocation(models.Model):
     def __str__(self):
         return self.locName
 
+    def saveLocation(self):
+        self.save()
+
 class ImageCategory(models.Model):
     imgCategory=models.CharField(max_length =30)
 
     def __str__(self):
         return self.imgCategory
+
+    def saveCategory(self):
+        self.save()
+
 class Image(models.Model):
     imgName=models.CharField(max_length =30)
     imgDesc=models.TextField()
