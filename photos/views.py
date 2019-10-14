@@ -11,3 +11,14 @@ def gallery(request):
     date = dt.date.today()
     photos = Image.save_Image()
     return render(request, 'all-picsPages/gallery.html', {"date": date,"photos":photos})
+
+def searchImage(request):
+    if 'image' in request.GET and request.GET['image']:
+        search_term=request.GET.get('image')
+        images=Image.searchImage(search_term)
+        message = f"{search_term}"
+
+        return render(request,'search.html',{'message':message,'images':images})
+    else:
+        message='no search yet'
+        return render(request,'search.html',{'message':message})
