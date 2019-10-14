@@ -23,6 +23,7 @@ class Image(models.Model):
     imgName=models.CharField(max_length =30)
     imgDesc=models.TextField()
     imgLoc=models.ForeignKey(ImageLocation)
+    imgUrl=models.URLField()
     imgCtgry=models.ForeignKey(ImageCategory)
     upload_image = models.ImageField(upload_to = 'pictures/')
 
