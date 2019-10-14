@@ -19,10 +19,10 @@ def searchImage(request):
         photos=Image.searchImage(search_term)
         message = f"{search_term}"
 
-        return render(request,'search.html',{'message':message,'photos':photos})
+        return render(request,'all-picsPages/search.html',{'message':message,'photos':photos})
     else:
         message='no search yet'
-        return render(request,'search.html',{'message':message})
+        return render(request,'all-picsPages/search.html',{'message':message})
 
 def imgDesc(request,imageId):
     try:
