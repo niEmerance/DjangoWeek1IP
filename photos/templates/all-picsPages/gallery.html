@@ -1,25 +1,109 @@
+<link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
 {%extends 'all-picsPages/base.html'%}
-{% block content %} 
-{{ block.super}}
+{%block content%}
+{{block.super}}
 
-<div class="container">
 
-  <!-- Looping through news   -->
-{% for photo in photos %}
+<div class="container-fluid" style="position: relative ; margin-top: 300px">
+    <h1 style="font-family: 'Sacramento', cursive;text-align: center;margin-bottom: 100px" >Enjoy !!</h1>
+    
 
-<div class="col-md-4">
-  <!-- {{ photo.imgName }} -->
-  <img src="{{photo.upload_image.url}}" class="img-responsive" alt="Image" style="width:350px; height:250px" >
-  <!-- {{ photo.imgDesc }}
-  {{ photo.imgLoc }}
-  {{ photo.imgCtgry }} -->
+    <div class="row">
+      {% for photo in photos %}
+
+        <!----------------------------------------------------------------------------------------->
+
+        <img data-toggle="modal" data-target="#{{photo.id}}" style="margin-left: 50px;margin-bottom: 50px" src="{{photo.upload_image.url}}"
+            class="img-responsive" alt="Image">
+        <br>
+        <br>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" style="padding-right: 500px">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"
+                            style="font-family: 'Philosopher', sans-serif;font-size: 15px">{{photo.imgName}}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="background-color: rgba(0,0,0,0.3)">
+
+
+                        <img src="{{photo.upload_image.url}}" class="img-responsive" alt="Image" style="width:250px; height:250px"> <br><br>
+                        <p style="font-size: 16px;font-family: 'Serif', cursive">
+                            Description:{{photo.imgDesc}}</p>
+                        <p style="font-size: 16px;font-family: 'Serif', cursive">
+                            Category:{{photo.imgCtgry}}</p>
+                        <p style="font-size: 16px;font-family: 'Serif', cursive">
+                            Location:{{photo.imgLoc}}</p>
+                        <textarea cols="58" style="font-size: 15px;font-family: 'sans-serif', cursive;color: green"
+                            id="imgUrl">
+                            {{photo.imgUrl}}</textarea><br><br>
+                        <button class="btn btn-secondary" onclick="copy()" id="button" style="font-family: 'Serif', cursive;font-size: 20px">Copy text</button>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family: 'Serif', cursive;font-size: 20px">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!----------------------------------------------------------------------------------------->
+
+
+        {%endfor%}
+    </div>
+
+
+
+
 </div>
-  {% empty %}
-  <div class="row">
-    <h2 class="text-center">No posted Pictures Yet</h2>
-  </div>
-  {% endfor %}
 
-</div>
+{%endblock%}
+{% block scripts %}
+<script>
+ 
 
+    function copy() {
+        /* Get the text field */
+        var copyText = document.getElementById("imgUrl");
+
+        /* Select the text field */
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+    }
+    
+</script>
 {% endblock %}

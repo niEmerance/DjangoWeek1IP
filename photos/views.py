@@ -14,12 +14,12 @@ def gallery(request):
     return render(request, 'all-picsPages/gallery.html', {"date": date,"photos":photos})
 
 def searchImage(request):
-    if 'image' in request.GET and request.GET['image']:
-        search_term=request.GET.get('image')
-        images=Image.searchImage(search_term)
+    if 'image' in request.GET and request.GET['photo']:
+        search_term=request.GET.get('photo')
+        photos=Image.searchImage(search_term)
         message = f"{search_term}"
 
-        return render(request,'search.html',{'message':message,'images':images})
+        return render(request,'search.html',{'message':message,'photos':photos})
     else:
         message='no search yet'
         return render(request,'search.html',{'message':message})
